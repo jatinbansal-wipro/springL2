@@ -1,0 +1,6 @@
+<form action="#" th:action="@{/marks}" th:object="${marksForm}" method="post" xmlns:th="http://www.w3.org/1999/xhtml">
+    Science: <input type="number" th:field="*{scienceMarks}"/> <br/>
+    Math: <input type="number" th:field="*{mathMarks}"/> <br/>
+    English: <input type="number" th:field="*{englishMarks}"/> <br/>
+    <button type="submit">Submit</button>
+</form>
