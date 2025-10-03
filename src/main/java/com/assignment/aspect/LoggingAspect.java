@@ -1,16 +1,27 @@
-package com.assignment.aop;
+package com.assignment.aspect;
+
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.springframework.stereotype.Component;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.time.LocalDateTime;
 
 @Aspect
 @Component
 public class LoggingAspect {
-    private Logger logger = LoggerFactory.getLogger(LoggingAspect.class);
+    private static final Logger logger = LogManager.getLogger(LoggingAspect.class);
 
-    @Around("execution(* com.example.service.StudentService.*(..))")
-    public Object logExecution(ProceedingJoinPoint joinPoint) throws Throwable {
+    @Around("execution(* com.assignment.service.StudentService.*(..))")
+    public Object logMethod(ProceedingJoinPoint joinPoint) throws Throwable {
+        String method = joinPoint.getSignature().getName();
+        LocalDateTime now = LocalDateTime.now();
         long start = System.currentTimeMillis();
         Object result = joinPoint.proceed();
-        long timeTaken = System.currentTimeMillis() - start;
-        logger.info("{} invoked at {}. Execution time: {} ms", joinPoint.getSignature().getName(), LocalDateTime.now(), timeTaken);
+        long elapsed = System.currentTimeMillis() - start;
+        logger.info("{} invoked at {} (Execution time: {} ms)", method, now, elapsed);
         return result;
     }
 }

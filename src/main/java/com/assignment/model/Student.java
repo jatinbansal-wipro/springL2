@@ -1,39 +1,18 @@
 package com.assignment.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
+@Entity
 public class Student {
-
     @Id
-    @GeneratedValue
-    private int studentId;
-    private String studentName;
-    private String studentAddress;
+    private Long id;
+    private String name;
 
+    // Getters and setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public Student(int studentId, String studentName, String studentAddress) {
-        this.studentId = studentId;
-        this.studentName = studentName;
-        this.studentAddress = studentAddress;
-    }
-
-    public int getStudentId() {
-        return studentId;
-    }
-
-    public String getStudentName() {
-        return studentName;
-    }
-
-    public String getStudentAddress() {
-        return studentAddress;
-    }
-
-    @Override
-    public String toString() {
-        return "Student{" +
-                "id=" + studentId +
-                ", name='" + studentName + '\'' +
-                ", address='" + studentAddress + '\'' +
-                '}';
-    }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
 }
